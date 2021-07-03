@@ -1,0 +1,17 @@
+div.card {
+    display: flex;
+    flex-direction: column;
+    border: solid;
+    border-color: var(--green);
+    padding: 1rem;
+    border-radius: 0.2rem;
+    width: 24vw;
+    height: 18vh;
+}
+
+div.card div.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}

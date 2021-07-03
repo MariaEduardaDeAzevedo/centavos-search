@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+:root {
+    --green: #7dc49c;
+}
+
+body {
+    font-family: 'Share Tech Mono', monospace;
+}
+
+.container header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: var(--green);
+    width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+}
+
+.container header h3 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap:0.4rem;
+    align-items: center;
+}
+
+.container header div.form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: center;
+    padding-right: 1.8rem;
+}
+
+.container header div.form button {
+    background-color: var(--green);
+    border: solid;
+    border-radius: 0.2rem;
+    color: white;
+    border-width: 0.1rem;
+    cursor: pointer;
+}
+
+.container header div.form input {
+    background-color: var(--green);
+    border: solid;
+    border-radius: 0.2rem;
+    color: white;
+    border-width: 0.1rem;
+    padding: 0.4rem;
+    text-align: center;
+}
+
+.container main {
+    margin-top: 5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    gap: 1rem;
+}
+
+.container footer {
+    width: 100%;
+    background-color: var(--green);
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    padding: 1rem;
+    color: white;
+}
