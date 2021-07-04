@@ -14,7 +14,7 @@ const Home = () => {
   const [situation, setSituation] = useState("");
 
   const api = axios.create({
-    baseURL: "https://centavos-search.herokuapp.com/"
+    baseURL: "https://centavos-search.herokuapp.com"
   });
 
   useEffect(() =>{
