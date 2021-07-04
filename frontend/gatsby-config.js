@@ -1,6 +1,7 @@
 module.exports = {
+    pathPrefix: "/centavos-search",
     siteMetadata: {
-        siteUrl: `https://www.yourdomain.tld`,
+        siteUrl: `https://mariaeduardadeazevedo.github.io/centavos-search/`,
     },
     plugins: [
 
