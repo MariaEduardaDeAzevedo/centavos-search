@@ -15,3 +15,10 @@ div.card div.header {
     justify-content: space-between;
     align-items: center;
 }
+
+div.card p {
+    word-wrap: break-word;
+    overflow: hidden;
+    align-items: center;
+    justify-content: space-between;
+}

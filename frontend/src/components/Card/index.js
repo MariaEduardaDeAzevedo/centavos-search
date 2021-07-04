@@ -1,5 +1,5 @@
 import * as React from "react"
-import {} from "react-feather"
+import {DollarSign} from "react-feather"
 
 import './styles.css'
 
@@ -8,6 +8,7 @@ const Card = ({cents, date, description, mode}) => {
         <div className="card">
             <div className="header">
                 <p>
+                    <DollarSign size={15}/>
                     {cents} centavos
                 </p>
                 <p>
