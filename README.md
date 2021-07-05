@@ -47,7 +47,7 @@ ou
 flask run
 ```
 
-##Front-end
+## Front-end
 Para rodar o front-end vá até a pasta correspondente
 ```bash
 cd frontend
