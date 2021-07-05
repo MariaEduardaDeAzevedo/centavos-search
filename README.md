@@ -6,7 +6,7 @@ Para melhorar a interface de visualização dos seus centavos na disciplina de L
 
 A aplicação pode ser acessada via **[https://centavos-search.firebaseapp.com/](https://centavos-search.firebaseapp.com/)**
 
-##Como funciona o Centavos Search?
+## Como funciona o Centavos Search?
 
 O **Centavos Search** é uma aplicação web composta de um back-end e um front-end.
 
