@@ -187,3 +187,24 @@ body {
     justify-content: space-between;
     gap: 1rem;
 }
+
+@media screen and (max-width: 800px){
+    .container header {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+    }
+
+    .container header .menu {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .container main {
+        margin-top: 12rem;
+        text-align: justify;
+        flex-direction: column;
+    }
+}
