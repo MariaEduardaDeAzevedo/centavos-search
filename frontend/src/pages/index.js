@@ -8,7 +8,7 @@ import "./styles.css"
 
 const Home = () => {
 
-  const [list, setList] = useState([]);
+  const [projects, setProjects] = useState([]);
   const [search, setSearch] = useState("");
   const [cents, setCents] = useState(0);
   const [situation, setSituation] = useState("");
@@ -23,12 +23,12 @@ const Home = () => {
     } else {
       setSituation("NÃO APROVADE")
     }
-  }, [search, list, cents])
+  }, [search, projects, cents])
 
   function handleSearch() {
     api.get(`/search/${search}`).then(
       (response) => {
-        setList(response.data.projects)
+        setProjects(response.data.projects)
         console.log(response.data)
         setCents(response.data.cents)
       }
@@ -62,7 +62,7 @@ const Home = () => {
       
         <span>
           {
-            list.length != 0 ? `${cents} centavos acumulados - ${situation}` : ""
+            projects?.length > 0 ? `${cents} centavos acumulados - ${situation}` : "ID inexistente!"
           }
         </span>
         <div className="form">
@@ -74,8 +74,8 @@ const Home = () => {
       </header>
 
       <main>
-        {list.length > 0 ?
-          list.map((res) => {
+        {projects?.length > 0 ?
+          projects.map((res) => {
             return(
               <Card cents={res.cents} date={res.date} description={res.description} mode={res.mode} key={res.description}/>
             );
