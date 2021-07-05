@@ -28,9 +28,13 @@ const Home = () => {
   function handleSearch() {
     api.get(`/search/${search}`).then(
       (response) => {
-        setProjects(response.data.projects)
-        console.log(response.data)
-        setCents(response.data.cents)
+          setProjects(response.data.projects)
+          setCents(response.data.cents)
+
+          if (response.data.mens == 'Student not found...') {
+            window.alert("Ops... ID de anonimização inexistente!")
+          }
+
       }
     ).catch(
       (err) => {
@@ -62,7 +66,7 @@ const Home = () => {
       
         <span>
           {
-            projects?.length > 0 ? `${cents} centavos acumulados - ${situation}` : "ID inexistente!"
+            projects?.length > 0 ? `${cents} centavos acumulados - ${situation}` : ""
           }
         </span>
         <div className="form">
