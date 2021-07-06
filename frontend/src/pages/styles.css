@@ -234,12 +234,30 @@ body {
     gap: 1rem;
 }
 
-header div.search-box {
+header form.search-box {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
+}
+
+footer .top-back {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    color: var(--green-darker);
+    text-decoration: none;
+    padding: 0.4rem;
+    border-radius: 0.4rem;
+    transition: 0.2s;
+}
+
+footer .top-back:hover {
+    background-color: var(--green-darker);
+    color: white;
 }
 
 @media screen and (max-width: 800px){

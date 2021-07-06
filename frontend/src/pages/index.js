@@ -4,7 +4,7 @@ import {Container, Dropdown, Row} from 'react-bootstrap'
 import Card from "../components/Card";
 import moment from 'moment';
 import {Search, DollarSign, Heart, GitHub, Menu, ChevronDown } from 'react-feather';
-import { ImSortAmountAsc, ImSortAmountDesc } from "react-icons/im";
+import { ImArrowUp2, ImSortAmountAsc, ImSortAmountDesc } from "react-icons/im";
 
 import "./styles.css"
 
@@ -59,7 +59,8 @@ const Home = () => {
     return array;
   }, [order]);
 
-  function handleSearch() {
+  function handleSearch(event) {
+    event.preventDefault();
     setOrder(undefined);
     api.get(`/search/${search}`).then(
       (response) => {
@@ -128,15 +129,15 @@ const Home = () => {
               <Dropdown.Item className="actionbar__menuItem" eventKey="mode:desc">Ambiente <ImSortAmountDesc /></Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
-          <div className="search-box">
+          <form className="search-box" onSubmit={handleSearch}>
             <input placeholder="ID DE ANONIMIZAÇÃO" onChange={(event) => {setSearch(event.target.value)}} />
-            <button onClick={() => {handleSearch()}}>
+            <button type="submit" onClick={handleSearch}>
               <Search/>
             </button>
-          </div>
+          </form>
         </div>
       </header>
-
+      <span id="top"></span>
       <main>
       {projects?.length > 0 ?
           handleOrder([...projects]).map((res, index) => {
@@ -147,6 +148,7 @@ const Home = () => {
          : "Pesquise pelo seu ID DE ANONIMIZAÇÃO e confira suas atividades corrigidas e centavos acumulados na disciplina de LOAC."}
       </main>
       <footer>
+        <a href="#top" className="top-back">Voltar ao topo <ImArrowUp2 /></a>
         <span>Feito com Gatsby e <Heart className="heart"/> por <a target="_blank" href="https://mariaeduardadeazevedo.github.io">Maria Eduarda de Azevedo © 2021</a></span>
         <a target="_blank" className="github" href="https://github.com/MariaEduardaDeAzevedo/centavos-search">Contribua no GitHub <GitHub /></a>
       </footer>
