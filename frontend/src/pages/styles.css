@@ -5,6 +5,10 @@
     --green-darker: #60c48b;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: 'Share Tech Mono', monospace;
 }
@@ -79,6 +83,7 @@ body {
     justify-content: space-around;
     width: 100%;
     gap: 1rem;
+    transition: 0.3s;
 }
 
 .container footer {
@@ -212,6 +217,7 @@ body {
     color: white;
     cursor: pointer;
     border: none;
+    transition: 0.3s;
 }
 
 .actionbar__menuItem {
@@ -242,6 +248,15 @@ header form.search-box {
     gap: 1rem;
 }
 
+header span.cents {
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+header span.cents:hover {
+    color: gray;
+}
+
 footer .top-back {
     display: flex;
     flex-direction: row;
@@ -260,6 +275,10 @@ footer .top-back:hover {
     color: white;
 }
 
+.container header h3 {
+    cursor: pointer;
+}
+
 @media screen and (max-width: 800px){
     .container header {
         flex-direction: column;
@@ -275,7 +294,7 @@ footer .top-back:hover {
     }
 
     .container main {
-        margin-top: 12rem;
+        margin-top: 14rem;
         text-align: justify;
         flex-direction: column;
     }

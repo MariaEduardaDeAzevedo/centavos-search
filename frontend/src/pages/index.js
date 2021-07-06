@@ -22,6 +22,9 @@ const Home = () => {
   });
 
   useEffect(() =>{
+
+    document.title = "CENTAVOS SEARCH"
+
     if (cents >= 700) {
       setSituation("APROVADE")
     } else {
@@ -100,9 +103,9 @@ const Home = () => {
         <h3><DollarSign /> <span>CENTAVOS SEARCH</span></h3>
       </div>
       
-        <span>
+        <span title="A anotação do professor não deixa claro os descontos dados" className="cents">
           {
-            projects?.length > 0 ? `${cents} centavos acumulados - ${situation}` : ""
+            projects?.length > 0 ? `Aproximadamente ${cents} centavos acumulados - ${situation}` : ""
           }
         </span>
         <div className="form">
