@@ -189,7 +189,6 @@ body {
     gap: 1rem;
 }
 
-
 .actionbar {
     position: relative;
     width: 9rem;
@@ -219,7 +218,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 0.4rem;
     padding: 0.8rem;
     text-decoration: none;
     color: white;

@@ -2,7 +2,9 @@ import axios from "axios";
 import React, { useCallback, useEffect, useState } from "react"
 import {Container, Dropdown, Row} from 'react-bootstrap'
 import Card from "../components/Card";
-import {Search, DollarSign, Heart, GitHub, Menu, ChevronDown, ArrowDown, ArrowUp} from 'react-feather'
+import moment from 'moment';
+import {Search, DollarSign, Heart, GitHub, Menu, ChevronDown } from 'react-feather';
+import { ImSortAmountAsc, ImSortAmountDesc } from "react-icons/im";
 
 import "./styles.css"
 
@@ -24,21 +26,28 @@ const Home = () => {
     } else {
       setSituation("NÃO APROVADE")
     }
-  }, [search, projects, cents])
+  }, [search, projects, cents]);
 
   const handleOrder = useCallback((array)=>{
     if(order) {
       return array.sort((p1, p2) => {
+        let firstElement = p1[order.key];
+        let secondElement = p2[order.key];
+        // se for date, é necessário tratá-lo antes
+        if(order.key === 'date'){
+          firstElement = moment(p1.date, 'DD-MM');
+          secondElement = moment(p2.date, 'DD-MM');
+        }
         if(order.direction === 'asc'){
           return (
-            p1[order.key] < p2[order.key] ? -1 : 
-            p1[order.key] > p2[order.key] ?  1 :
+            firstElement < secondElement ? -1 : 
+            firstElement > secondElement ?  1 :
             0
           )
         } else {
           return (
-            p1[order.key] < p2[order.key] ?  1 : 
-            p1[order.key] > p2[order.key] ? -1 :
+            firstElement < secondElement ?  1 : 
+            firstElement > secondElement ? -1 :
             0
           )
         }
@@ -49,6 +58,7 @@ const Home = () => {
   }, [order]);
 
   function handleSearch() {
+    setOrder(undefined);
     api.get(`/search/${search}`).then(
       (response) => {
           setProjects(response.data.projects)
@@ -105,14 +115,14 @@ const Home = () => {
             </Dropdown.Toggle>
 
             <Dropdown.Menu className="actionbar__menu">
-              <Dropdown.Item className="actionbar__menuItem" eventKey="cents:asc">Centavos <ArrowDown /></Dropdown.Item>
-              <Dropdown.Item className="actionbar__menuItem" eventKey="cents:desc">Centavos <ArrowUp /></Dropdown.Item>
-              <Dropdown.Item className="actionbar__menuItem" eventKey="date:asc">Data <ArrowDown /></Dropdown.Item>
-              <Dropdown.Item className="actionbar__menuItem" eventKey="date:desc">Data <ArrowUp /></Dropdown.Item>
-              <Dropdown.Item className="actionbar__menuItem" eventKey="description:asc">Descrição <ArrowDown /></Dropdown.Item>
-              <Dropdown.Item className="actionbar__menuItem" eventKey="description:desc">Descrição <ArrowUp /></Dropdown.Item>
-              <Dropdown.Item className="actionbar__menuItem" eventKey="mode:asc">Ambiente <ArrowDown /></Dropdown.Item>
-              <Dropdown.Item className="actionbar__menuItem" eventKey="mode:desc">Ambiente <ArrowUp /></Dropdown.Item>
+              <Dropdown.Item className="actionbar__menuItem" eventKey="cents:asc">Centavos <ImSortAmountAsc /></Dropdown.Item>
+              <Dropdown.Item className="actionbar__menuItem" eventKey="cents:desc">Centavos <ImSortAmountDesc /></Dropdown.Item>
+              <Dropdown.Item className="actionbar__menuItem" eventKey="date:asc">Data <ImSortAmountAsc /></Dropdown.Item>
+              <Dropdown.Item className="actionbar__menuItem" eventKey="date:desc">Data <ImSortAmountDesc /></Dropdown.Item>
+              <Dropdown.Item className="actionbar__menuItem" eventKey="description:asc">Descrição <ImSortAmountAsc /></Dropdown.Item>
+              <Dropdown.Item className="actionbar__menuItem" eventKey="description:desc">Descrição <ImSortAmountDesc /></Dropdown.Item>
+              <Dropdown.Item className="actionbar__menuItem" eventKey="mode:asc">Ambiente <ImSortAmountAsc /></Dropdown.Item>
+              <Dropdown.Item className="actionbar__menuItem" eventKey="mode:desc">Ambiente <ImSortAmountDesc /></Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
           <input placeholder="ID DE ANONIMIZAÇÃO" onChange={(event) => {setSearch(event.target.value)}} />
