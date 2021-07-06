@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useCallback, useEffect, useState } from "react"
-import {Container, Row, Dropdown} from 'react-bootstrap'
+import {Container, Dropdown, Row} from 'react-bootstrap'
 import Card from "../components/Card";
 import {Search, DollarSign, Heart, GitHub, Menu, ChevronDown, ArrowDown, ArrowUp} from 'react-feather'
 
@@ -12,6 +12,7 @@ const Home = () => {
   const [search, setSearch] = useState("");
   const [order, setOrder] = useState();
   const [cents, setCents] = useState(0);
+  const [order, setOrder] = useState();
   const [situation, setSituation] = useState("");
 
   const api = axios.create({
@@ -25,6 +26,28 @@ const Home = () => {
       setSituation("NÃO APROVADE")
     }
   }, [search, projects, cents]);
+
+  const handleOrder = useCallback((array)=>{
+    if(order) {
+      return array.sort((p1, p2) => {
+        if(order.direction === 'asc'){
+          return (
+            p1[order.key] < p2[order.key] ? -1 : 
+            p1[order.key] > p2[order.key] ?  1 :
+            0
+          )
+        } else {
+          return (
+            p1[order.key] < p2[order.key] ?  1 : 
+            p1[order.key] > p2[order.key] ? -1 :
+            0
+          )
+        }
+      }
+      );
+    }
+    return array;
+  }, [order]);
 
   const handleOrder = useCallback((array)=>{
     if(order) {
@@ -93,7 +116,7 @@ const Home = () => {
           }
         </span>
         <div className="form">
-          <Dropdown className="actionbar" onSelect={(k, e)=>{
+        <Dropdown className="actionbar" onSelect={(k, e)=>{
             const [key, direction] = k.split(':');
             setOrder({key, direction, name: e.target.text});
           }}>
@@ -123,7 +146,7 @@ const Home = () => {
       </header>
 
       <main>
-        {projects?.length > 0 ?
+      {projects?.length > 0 ?
           handleOrder([...projects]).map((res, index) => {
             return(
               <Card cents={res.cents} date={res.date} description={res.description} mode={res.mode} key={index}/>

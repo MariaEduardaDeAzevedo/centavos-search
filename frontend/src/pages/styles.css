@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
 
 :root {
-    --green: #95cead;
+    --green: #7dc49c;
     --green-darker: #60c48b;
 }
 
@@ -193,6 +193,28 @@ body {
     position: relative;
     width: 9rem;
 }
+
+.actionbar__select {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding-left: 1rem;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.actionbar__menu {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--green);
+    color: white;
+    cursor: pointer;
+    border: none;
+}
+
+.actionbar__menuItem {
 
 .actionbar__select {
     width: 100%;
