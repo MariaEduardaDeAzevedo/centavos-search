@@ -1,8 +1,8 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react"
-import {Container, Dropdown} from 'react-bootstrap'
+import React, { useCallback, useEffect, useState } from "react"
+import {Container, Dropdown, Row} from 'react-bootstrap'
 import Card from "../components/Card";
-import {Search, DollarSign, Heart, GitHub, Menu} from 'react-feather'
+import {Search, DollarSign, Heart, GitHub, Menu, ChevronDown, ArrowDown, ArrowUp} from 'react-feather'
 
 import "./styles.css"
 
@@ -11,6 +11,7 @@ const Home = () => {
   const [projects, setProjects] = useState([]);
   const [search, setSearch] = useState("");
   const [cents, setCents] = useState(0);
+  const [order, setOrder] = useState();
   const [situation, setSituation] = useState("");
 
   const api = axios.create({
@@ -24,6 +25,28 @@ const Home = () => {
       setSituation("NÃO APROVADE")
     }
   }, [search, projects, cents])
+
+  const handleOrder = useCallback((array)=>{
+    if(order) {
+      return array.sort((p1, p2) => {
+        if(order.direction === 'asc'){
+          return (
+            p1[order.key] < p2[order.key] ? -1 : 
+            p1[order.key] > p2[order.key] ?  1 :
+            0
+          )
+        } else {
+          return (
+            p1[order.key] < p2[order.key] ?  1 : 
+            p1[order.key] > p2[order.key] ? -1 :
+            0
+          )
+        }
+      }
+      );
+    }
+    return array;
+  }, [order]);
 
   function handleSearch() {
     api.get(`/search/${search}`).then(
@@ -70,6 +93,28 @@ const Home = () => {
           }
         </span>
         <div className="form">
+        <Dropdown className="actionbar" onSelect={(k, e)=>{
+            const [key, direction] = k.split(':');
+            setOrder({key, direction, name: e.target.text});
+          }}>
+            <Dropdown.Toggle variant="success" id="dropdown-basic" className="actionbar__select">
+              <Row>
+                <span>{ order ? order.name : 'Ordenar por'}</span>
+              </Row>
+              <ChevronDown />
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu className="actionbar__menu">
+              <Dropdown.Item className="actionbar__menuItem" eventKey="cents:asc">Centavos <ArrowDown /></Dropdown.Item>
+              <Dropdown.Item className="actionbar__menuItem" eventKey="cents:desc">Centavos <ArrowUp /></Dropdown.Item>
+              <Dropdown.Item className="actionbar__menuItem" eventKey="date:asc">Data <ArrowDown /></Dropdown.Item>
+              <Dropdown.Item className="actionbar__menuItem" eventKey="date:desc">Data <ArrowUp /></Dropdown.Item>
+              <Dropdown.Item className="actionbar__menuItem" eventKey="description:asc">Descrição <ArrowDown /></Dropdown.Item>
+              <Dropdown.Item className="actionbar__menuItem" eventKey="description:desc">Descrição <ArrowUp /></Dropdown.Item>
+              <Dropdown.Item className="actionbar__menuItem" eventKey="mode:asc">Ambiente <ArrowDown /></Dropdown.Item>
+              <Dropdown.Item className="actionbar__menuItem" eventKey="mode:desc">Ambiente <ArrowUp /></Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
           <input placeholder="ID DE ANONIMIZAÇÃO" onChange={(event) => {setSearch(event.target.value)}} />
           <button onClick={() => {handleSearch()}}>
             <Search/>
@@ -78,10 +123,10 @@ const Home = () => {
       </header>
 
       <main>
-        {projects?.length > 0 ?
-          projects.map((res) => {
+      {projects?.length > 0 ?
+          handleOrder([...projects]).map((res, index) => {
             return(
-              <Card cents={res.cents} date={res.date} description={res.description} mode={res.mode} key={res.description}/>
+              <Card cents={res.cents} date={res.date} description={res.description} mode={res.mode} key={index}/>
             );
           })
          : "Pesquise pelo seu ID DE ANONIMIZAÇÃO e confira suas atividades corrigidas e centavos acumulados na disciplina de LOAC."}
