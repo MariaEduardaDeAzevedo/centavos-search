@@ -30,7 +30,7 @@ body {
     align-items: center;
     justify-content: space-between;
     color: white;
-    box-shadow: 0px 1px 5px 1px var(--green);
+    box-shadow: 0px 1px 5px 1px #7dc49c;
 }
 
 .container header h3 {
@@ -215,36 +215,34 @@ body {
 }
 
 .actionbar__menuItem {
-
-.actionbar__select {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    padding-left: 1rem;
-    justify-content: space-between;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.actionbar__menu {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    background-color: var(--green);
-    color: white;
-    cursor: pointer;
-    border: none;
-}
-
-.actionbar__menuItem {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 0.4rem;
     padding: 0.8rem;
     text-decoration: none;
     color: white;
 }
 .actionbar__menuItem:hover {
     background-color: var(--green-darker);
+}
+
+@media screen and (max-width: 800px){
+    .container header {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+    }
+
+    .container header .menu {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .container main {
+        margin-top: 12rem;
+        text-align: justify;
+        flex-direction: column;
+    }
 }
