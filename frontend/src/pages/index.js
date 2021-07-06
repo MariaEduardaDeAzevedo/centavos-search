@@ -15,6 +15,7 @@ const Home = () => {
   const [cents, setCents] = useState(0);
   const [order, setOrder] = useState();
   const [situation, setSituation] = useState("");
+  const [directionIcon, setDirectionIcon] = useState(<></>)
 
   const api = axios.create({
     baseURL: "https://centavos-search.herokuapp.com"
@@ -26,7 +27,8 @@ const Home = () => {
     } else {
       setSituation("NÃO APROVADE")
     }
-  }, [search, projects, cents]);
+    
+  }, [search, projects, cents, order]);
 
   const handleOrder = useCallback((array)=>{
     if(order) {
@@ -105,11 +107,12 @@ const Home = () => {
         <div className="form">
         <Dropdown className="actionbar" onSelect={(k, e)=>{
             const [key, direction] = k.split(':');
-            setOrder({key, direction, name: e.target.text});
+            const icon = direction === 'asc' ? <ImSortAmountAsc /> : <ImSortAmountDesc />
+            setOrder({key, direction, name: `${e.target.text}`, icon});
           }}>
             <Dropdown.Toggle variant="success" id="dropdown-basic" className="actionbar__select">
               <Row>
-                <span>{ order ? order.name : 'Ordenar por'}</span>
+                <span>{ order ? `${order.name}` : 'Ordenar por'} {order ? order.icon : ""}</span>
               </Row>
               <ChevronDown />
             </Dropdown.Toggle>
@@ -125,10 +128,12 @@ const Home = () => {
               <Dropdown.Item className="actionbar__menuItem" eventKey="mode:desc">Ambiente <ImSortAmountDesc /></Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
-          <input placeholder="ID DE ANONIMIZAÇÃO" onChange={(event) => {setSearch(event.target.value)}} />
-          <button onClick={() => {handleSearch()}}>
-            <Search/>
-          </button>
+          <div className="search-box">
+            <input placeholder="ID DE ANONIMIZAÇÃO" onChange={(event) => {setSearch(event.target.value)}} />
+            <button onClick={() => {handleSearch()}}>
+              <Search/>
+            </button>
+          </div>
         </div>
       </header>
 

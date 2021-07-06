@@ -226,6 +226,22 @@ body {
     background-color: var(--green-darker);
 }
 
+.actionbar__select span {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+header div.search-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
 @media screen and (max-width: 800px){
     .container header {
         flex-direction: column;
@@ -244,5 +260,16 @@ body {
         margin-top: 12rem;
         text-align: justify;
         flex-direction: column;
+    }
+
+    .container header div.form {
+        flex-direction: column-reverse;
+    }
+
+    .actionbar__select {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
     }
 }
