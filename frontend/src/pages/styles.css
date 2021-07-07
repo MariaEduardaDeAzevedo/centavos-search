@@ -3,6 +3,7 @@
 :root {
     --green: #7dc49c;
     --green-darker: #60c48b;
+    scroll-behavior: smooth;
 }
 
 html {
@@ -192,6 +193,10 @@ body {
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
+}
+
+.container header .menu h3 {
+    cursor: pointer;
 }
 
 .actionbar {
