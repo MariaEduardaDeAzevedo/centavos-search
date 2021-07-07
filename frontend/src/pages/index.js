@@ -5,6 +5,7 @@ import Card from "../components/Card";
 import moment from 'moment';
 import {Search, DollarSign, Heart, GitHub, Menu, ChevronDown } from 'react-feather';
 import { ImArrowUp2, ImSortAmountAsc, ImSortAmountDesc } from "react-icons/im";
+import { navigate } from 'gatsby';
 
 import "./styles.css"
 
@@ -32,6 +33,12 @@ const Home = () => {
     }
     
   }, [search, projects, cents, order]);
+
+  const navigateHome = useCallback(()=>{
+    setProjects([]);
+    setOrder(undefined);
+    navigate('/');
+  }, [setProjects, setOrder, navigate]);
 
   const handleOrder = useCallback((array)=>{
     if(order) {
@@ -100,7 +107,7 @@ const Home = () => {
           </Dropdown.Menu>
         </Dropdown>
 
-        <h3><DollarSign /> <span>CENTAVOS SEARCH</span></h3>
+        <h3 onClick={navigateHome}><DollarSign /> <span>CENTAVOS SEARCH</span></h3>
       </div>
       
         <span title="A anotação do professor não deixa claro os descontos dados" className="cents">
@@ -140,7 +147,6 @@ const Home = () => {
           </form>
         </div>
       </header>
-      <span id="top"></span>
       <main>
       {projects?.length > 0 ?
           handleOrder([...projects]).map((res, index) => {
