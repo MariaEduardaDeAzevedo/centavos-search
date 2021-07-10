@@ -204,9 +204,11 @@ const Home = () => {
         </a>
         <span>
           Feito com Gatsby e
+          {' '}
           <Heart className="heart" />
           {' '}
           por
+          {' '}
           <a target="_blank" href="https://mariaeduardadeazevedo.github.io" rel="noreferrer">Maria Eduarda de Azevedo © 2021</a>
         </span>
         <a target="_blank" className="github" href="https://github.com/MariaEduardaDeAzevedo/centavos-search" rel="noreferrer">
