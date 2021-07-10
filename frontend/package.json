@@ -15,7 +15,8 @@
     "clean": "gatsby clean",
     "deploy": "gatsby clean && gatsby build && node deploy-github.js",
     "lint": "eslint ./",
-		"lint-fix": "eslint ./ --fix"
+    "lint-fix": "eslint ./ --fix",
+    "format": "prettier --write \"**/*.{js,jsx,json,md}\""
   },
   "dependencies": {
     "@material-ui/core": "^4.11.4",
@@ -31,9 +32,12 @@
   "devDependencies": {
     "eslint": "^7.30.0",
     "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.24.0",
-    "eslint-plugin-react-hooks": "^4.2.0"
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "prettier": "^2.3.2"
   }
 }
