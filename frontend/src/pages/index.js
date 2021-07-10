@@ -2,17 +2,11 @@ import axios from "axios";
 import React, { useCallback, useEffect, useState } from "react";
 import { Container, Dropdown, Row } from "react-bootstrap";
 import moment from "moment";
-import {
-  Search,
-  DollarSign,
-  Heart,
-  GitHub,
-  Menu,
-  ChevronDown,
-} from "react-feather";
-import { ImArrowUp2, ImSortAmountAsc, ImSortAmountDesc } from "react-icons/im";
+import { Search, DollarSign, GitHub, Menu, ChevronDown } from "react-feather";
+import { ImSortAmountAsc, ImSortAmountDesc } from "react-icons/im";
 import { navigate } from "gatsby";
 import Card from "../components/Card";
+import Footer from "../components/Footer";
 
 import "./styles.css";
 
@@ -255,6 +249,7 @@ const Home = () => {
           </form>
         </div>
       </header>
+
       <main>
         {projects?.length > 0
           ? handleOrder([...projects]).map((res) => (
@@ -268,31 +263,8 @@ const Home = () => {
             ))
           : "Pesquise pelo seu ID DE ANONIMIZAÇÃO e confira suas atividades corrigidas e centavos acumulados na disciplina de LOAC."}
       </main>
-      <footer>
-        <a href="#top" className="top-back">
-          Voltar ao topo
-          <ImArrowUp2 />
-        </a>
-        <span>
-          Feito com Gatsby e <Heart className="heart" /> por{" "}
-          <a
-            target="_blank"
-            href="https://mariaeduardadeazevedo.github.io"
-            rel="noreferrer"
-          >
-            Maria Eduarda de Azevedo © 2021
-          </a>
-        </span>
-        <a
-          target="_blank"
-          className="github"
-          href="https://github.com/MariaEduardaDeAzevedo/centavos-search"
-          rel="noreferrer"
-        >
-          Contribua no GitHub
-          <GitHub />
-        </a>
-      </footer>
+
+      <Footer />
     </Container>
   );
 };
