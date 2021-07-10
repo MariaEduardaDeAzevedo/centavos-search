@@ -18,5 +18,9 @@
         "react"
     ],
     "rules": {
+        "react/jsx-filename-extension": "off",
+        "no-nested-ternary": "off",
+        "no-alert": "off",
+        "react/prop-types": "off"
     }
 }

@@ -284,6 +284,12 @@ footer .top-back:hover {
     cursor: pointer;
 }
 
+.no-styled-btn {
+    background: none;
+    border: none;
+    color: currentColor;
+}
+
 @media screen and (max-width: 800px){
     .container header {
         flex-direction: column;
