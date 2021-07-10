@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ImArrowUp2 } from "react-icons/im";
-import { Heart, GitHub } from "react-feather"
+import { Heart, GitHub } from "react-feather";
 
 const Footer = () => (
   <footer>
