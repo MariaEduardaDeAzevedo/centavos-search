@@ -1,0 +1,82 @@
+
+
+.container footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin: auto;
+  top: 87%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  color: gray;
+  cursor: pointer;
+  transition: 1s;
+  padding: 1rem;
+  background-color: white;
+  gap: 1rem;
+}
+
+.container footer:hover {
+  color: black;
+}
+
+.container footer span a {
+  text-decoration: none;
+  color: gray;
+  font-weight: bold;
+  transition: 1s;
+}
+
+.container footer span a:hover {
+  color: orangered;
+}
+
+.container footer a.github {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  text-decoration: none;
+  color: gray;
+  font-weight: bold;
+  transition: 1s;
+  padding: 1rem;
+  padding-right: 1.4rem;
+  border-radius: 0.8rem;
+}
+
+footer .top-back:hover {
+  background-color: var(--green-darker);
+  color: white;
+}
+
+.container footer a.github:hover {
+  background-color: var(--green);
+  color: white;
+}
+
+.container footer span .heart {
+  transition: 0.5s;
+}
+
+.container footer span .heart:hover {
+  color: red;
+  transform: scale(120%);
+}
+
+footer .top-back {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--green-darker);
+  text-decoration: none;
+  padding: 0.4rem;
+  border-radius: 0.4rem;
+  transition: 0.2s;
+}

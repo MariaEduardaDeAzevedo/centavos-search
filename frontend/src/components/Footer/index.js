@@ -2,6 +2,8 @@ import * as React from "react";
 import { ImArrowUp2 } from "react-icons/im";
 import { Heart, GitHub } from "react-feather";
 
+import "./styles.css";
+
 const Footer = () => (
   <footer>
     <a href="#top" className="top-back">
