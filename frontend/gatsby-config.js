@@ -1,9 +1,7 @@
 module.exports = {
-  pathPrefix: '/centavos-search',
+  pathPrefix: "/centavos-search",
   siteMetadata: {
-    siteUrl: 'https://mariaeduardadeazevedo.github.io/centavos-search/',
+    siteUrl: "https://mariaeduardadeazevedo.github.io/centavos-search/",
   },
-  plugins: [
-
-  ],
+  plugins: [],
 };

@@ -14,8 +14,8 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "deploy": "gatsby clean && gatsby build && node deploy-github.js",
-    "lint": "eslint ./",
-    "lint-fix": "eslint ./ --fix",
+    "lint": "eslint ./ --ignore-path .gitignore",
+    "lint-fix": "eslint ./ --ignore-path .gitignore --fix",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\""
   },
   "dependencies": {
