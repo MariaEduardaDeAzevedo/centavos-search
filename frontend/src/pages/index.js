@@ -35,7 +35,7 @@ const Home = () => {
     setProjects([]);
     setOrder(undefined);
     navigate("/");
-  }, [setProjects, setOrder, navigate]);
+  }, [setProjects, setOrder]);
 
   const handleOrder = useCallback(
     (array) => {
