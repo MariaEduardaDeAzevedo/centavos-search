@@ -13,8 +13,7 @@ const Card = ({ cents, date, description, mode }) => (
       <p>Data: {date}</p>
     </div>
     <p>
-      {description} no
-      {mode}
+      {description} no {mode}
     </p>
   </div>
 );
