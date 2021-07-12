@@ -31,6 +31,15 @@ def search(code):
 
     return flask.jsonify(student)
 
+@app.route("/ids/")
+def ids():
+
+    id_list = {
+        "list": functions.ids()
+    }
+
+    return flask.jsonify(id_list)
+
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))

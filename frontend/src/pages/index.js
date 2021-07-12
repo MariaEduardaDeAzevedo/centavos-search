@@ -16,6 +16,7 @@ const Home = () => {
   const [cents, setCents] = useState(0);
   const [order, setOrder] = useState();
   const [situation, setSituation] = useState("");
+  const [ids, setIds] = useState([])
 
   const api = axios.create({
     baseURL: "https://centavos-search.herokuapp.com",
@@ -29,7 +30,14 @@ const Home = () => {
     } else {
       setSituation("NÃO APROVADE");
     }
-  }, [search, projects, cents, order]);
+
+    api.get("/ids").then((response) => {
+      setIds(response.data.list)
+    }).catch(
+      
+    );
+
+  }, [search, projects, cents, order, ids]);
 
   const navigateHome = useCallback(() => {
     setProjects([]);

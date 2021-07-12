@@ -41,3 +41,8 @@ def get_file():
             data[code]["cents"] += int(cents)
 
     return data
+
+
+def ids():
+    keys = get_file().keys()
+    return list(keys)
