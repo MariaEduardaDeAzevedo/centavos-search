@@ -10,9 +10,12 @@ def get_file():
 
     for line in lines:
         if len(line) > 0:
-            code, date, cents, mode = line.split()[:4]
-            mode = mode[:-1]    
-
+            code, date, cents, mode = ("", "", "", "")
+            if len(line.split()) >= 4:
+                code, date, cents, mode = line.split()[:4]
+                mode = mode[:-1]    
+            else:
+                continue
 
             description = None
             try:
