@@ -1,9 +1,9 @@
 import axios from "axios";
 import React, { useCallback, useEffect, useState } from "react";
-import { Container, Dropdown, Row } from "react-bootstrap";
+import { Container, Dropdown, Row, Toast } from "react-bootstrap";
 import moment from "moment";
 import { Search, DollarSign, GitHub, Menu, ChevronDown } from "react-feather";
-import { ImSortAmountAsc, ImSortAmountDesc } from "react-icons/im";
+import { ImSearch, ImSortAmountAsc, ImSortAmountDesc } from "react-icons/im";
 import { navigate } from "gatsby";
 import Card from "../components/Card";
 import Footer from "../components/Footer";
@@ -16,7 +16,13 @@ const Home = () => {
   const [cents, setCents] = useState(0);
   const [order, setOrder] = useState();
   const [situation, setSituation] = useState("");
-  const [ids, setIds] = useState([])
+  //const [ids, setIds] = useState([])
+
+  const [showA, setShowA] = useState(true);
+  const [showB, setShowB] = useState(true);
+
+  const toggleShowA = () => setShowA(!showA);
+  const toggleShowB = () => setShowB(!showB);
 
   const api = axios.create({
     baseURL: "https://centavos-search.herokuapp.com",
@@ -31,13 +37,7 @@ const Home = () => {
       setSituation("NÃO APROVADE");
     }
 
-    api.get("/ids").then((response) => {
-      setIds(response.data.list)
-    }).catch(
-      
-    );
-
-  }, [search, projects, cents, order, ids]);
+  }, [search, projects, cents, order]);
 
   const navigateHome = useCallback(() => {
     setProjects([]);
@@ -129,6 +129,13 @@ const Home = () => {
                 className="drop-item"
               >
                 Site de LOAC
+              </Dropdown.Item>
+              <Dropdown.Item
+                href="/analytics"
+                className="drop-item"
+              >
+                <ImSearch/>
+                CENTAVOS ANALYTICS
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
@@ -272,6 +279,17 @@ const Home = () => {
           : "Pesquise pelo seu ID DE ANONIMIZAÇÃO e confira suas atividades corrigidas e centavos acumulados na disciplina de LOAC."}
       </main>
 
+        <Toast show={showA} onClose={toggleShowA} className="toast" autohide delay={500000}>
+          <Toast.Header className="toast-header">
+            NOVIDADE!
+          </Toast.Header>
+          <Toast.Body>
+            <p>
+            Quer saber como anda a situação geral da turma em uma análise rápida?
+            Confira o <a href="/analytics">Centavos Analytics</a>
+            </p>
+          </Toast.Body>
+        </Toast>
       <Footer />
     </Container>
   );

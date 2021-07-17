@@ -31,7 +31,7 @@ def search(code):
 
     return flask.jsonify(student)
 
-@app.route("/ids/")
+@app.route("/ids")
 def ids():
 
     id_list = {
@@ -41,6 +41,11 @@ def ids():
     return flask.jsonify(id_list)
 
 
+@app.route("/analytics", methods=["GET"])
+def analytics():
+    return flask.jsonify(functions.analytics())
+
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)    
+    app.run(debug=True, host='0.0.0.0', port=port)    

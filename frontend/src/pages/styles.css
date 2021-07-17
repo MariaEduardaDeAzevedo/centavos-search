@@ -87,6 +87,22 @@ body {
     transition: 0.3s;
 }
 
+.container main.analytics p {
+    font-size: 32px;
+    text-align: justify;
+    line-height: 4rem;
+}
+
+.container main.analytics p strong {
+    color: var(--green);
+    cursor: pointer;
+    transition: 1s;
+}
+
+.container main.analytics p strong:hover {
+    color: var(--green-darker);
+}
+
 .container header .menu .menu-dropdown {
     background-color: var(--green);
     color: white;
@@ -197,6 +213,10 @@ header span.cents:hover {
     color: gray;
 }
 
+header span.desc {
+    margin-right: 1.8rem;
+}
+
 .container header h3 {
     cursor: pointer;
 }
@@ -205,6 +225,75 @@ header span.cents:hover {
     background: none;
     border: none;
     color: currentColor;
+}
+
+.toast {
+    background-color: var(--green);
+    display: flex;
+    flex-direction: column;
+    color: white;
+    max-width: 24vw;
+    position: fixed;
+    align-self: flex-end;
+    box-shadow: 0 0 0.4em gray;
+    transition: 0.5s;
+    margin-top: 1rem;
+}
+
+.toast .toast-header {
+    background-color: var(--green-darker);
+    padding: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.toast .toast-body {
+    background-color: var(--green);
+    padding: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    text-align: justify;
+}
+
+.toast .toast-body a {
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+    transition: 0.5s;
+}
+
+.toast .toast-body a:hover {
+    color: gray;
+}
+
+
+.toast button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.toast button span {
+    font-size: 32px;
+    max-width: 0.8rem;
+    transition: 0.5s;
+}
+
+.toast button span:hover {
+    color: red;
+}
+
+.toast button span.sr-only {
+    visibility: hidden;
 }
 
 @media screen and (max-width: 800px){
@@ -236,5 +325,11 @@ header span.cents:hover {
         flex-direction: row;
         align-items: center;
         justify-content: center;
+    }
+
+    .toast {
+        margin-top: 5rem;
+        align-self: center;
+        max-width: 90%;
     }
 }
