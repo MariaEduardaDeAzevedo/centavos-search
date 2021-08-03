@@ -91,7 +91,7 @@ def analytics():
         j = i + 1
         obj_analytics['median'] = int((list_median[i] + list_median[j])/2)
     else:
-        i = len(list_median)/2
+        i = len(list_median)//2
         obj_analytics['median'] = int(list_median[i])
     
 

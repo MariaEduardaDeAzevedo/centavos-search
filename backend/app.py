@@ -9,6 +9,7 @@ def after_req(response):
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
+
 @app.route("/")
 def hello_world():
     return flask.jsonify(functions.get_file())
