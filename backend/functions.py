@@ -49,6 +49,51 @@ def ids():
     keys = get_file().keys()
     return list(keys)
 
+def group_by_mode():
+    file = requests.get("http://lad.ufcg.edu.br/loac/uploads/OAC/anon.txt")
+
+    lines = file.text.split('\n')
+
+    data = dict()
+
+    for line in lines:
+        if len(line) > 0:
+            code, date, cents, mode = ("", "", "", "")
+            if len(line.split()) >= 4:
+                code, date, cents, mode = line.split()[:4]
+                mode = mode[:-1]    
+            else:
+                continue
+
+            description = None
+            try:
+                description = line.split(":")[1]
+            except:
+                description = ""
+
+            if code not in data:
+                data[code] = {
+                    "projects": {},
+                    "cents": 0
+                }
+
+            if mode not in data[code]["projects"].keys():
+                data[code]["projects"][mode] = {"all": [], "sum": 0}
+
+            data[code]["projects"][mode]["all"].append(
+                {
+                    "date": date,
+                    "cents": int(cents),
+                    "description": description
+                }
+            )
+            
+            data[code]["projects"][mode]["sum"] += int(cents)
+
+            data[code]["cents"] += int(cents)
+
+    return data    
+
 
 def analytics():
     file = get_file()

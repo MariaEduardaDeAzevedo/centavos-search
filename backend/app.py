@@ -46,6 +46,9 @@ def ids():
 def analytics():
     return flask.jsonify(functions.analytics())
 
+@app.route("/group", methods=["GET"])
+def group():
+    return flask.jsonify(functions.group_by_mode())
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
