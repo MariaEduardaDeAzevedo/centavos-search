@@ -28,7 +28,8 @@ def get_file():
             if code not in data:
                 data[code] = {
                     "projects": [],
-                    "cents": 0
+                    "cents": 0,
+                    "modes": []
                 }
 
             data[code]["projects"].append(
@@ -41,6 +42,9 @@ def get_file():
             )
 
             data[code]["cents"] += int(cents)
+
+            if mode not in data[code]["modes"]:
+                data[code]["modes"].append(mode)
 
     return data
 

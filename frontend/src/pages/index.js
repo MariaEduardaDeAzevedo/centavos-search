@@ -14,9 +14,12 @@ const Home = () => {
   const [projects, setProjects] = useState([]);
   const [search, setSearch] = useState("");
   const [cents, setCents] = useState(0);
+  const [totalCents, setTotalCents] = useState(0);
   const [order, setOrder] = useState();
+  const [filter, setFilter] = useState();
   const [situation, setSituation] = useState("");
-  //const [ids, setIds] = useState([])
+  const [types, setTypes] = useState([])
+  const [searchView, setSearchView] = useState(false)
 
   const [showA, setShowA] = useState(true);
   const [showB, setShowB] = useState(true);
@@ -36,14 +39,32 @@ const Home = () => {
     } else {
       setSituation("NÃO APROVADE");
     }
+    if (filter) {
+      if (filter.name == "TODOS") {
+        setCents(totalCents)
+        return
+      }
+      let filterCents = 0;
+      for (let index = 0; index < projects.length; index++) {
+        const element = projects[index];
+        if (element.mode.toUpperCase() == filter.name) {
+          filterCents += element.cents;
+        }
+      }
 
-  }, [search, projects, cents, order]);
+      setCents(filterCents)
+    }
+
+  }, [search, projects, cents, order, types, filter]);
 
   const navigateHome = useCallback(() => {
     setProjects([]);
+    setTypes([]);
     setOrder(undefined);
+    setFilter(undefined);
     navigate("/");
-  }, [setProjects, setOrder]);
+    setSearchView(false);
+  }, [setProjects, setOrder, setTypes, setFilter, setSearchView]);
 
   const handleOrder = useCallback(
     (array) => {
@@ -78,14 +99,20 @@ const Home = () => {
   function handleSearch(event) {
     event.preventDefault();
     setOrder(undefined);
+    setFilter(undefined);
     api
       .get(`/search/${search}`)
       .then((response) => {
         setProjects(response.data.projects);
         setCents(response.data.cents);
-
+        setTotalCents(response.data.cents);
+        let modes = ["todos"]
+        modes.push(...response.data.modes)
+        setTypes(modes);
         if (response.data.mens === "Student not found...") {
           window.alert("Ops... ID de anonimização inexistente!");
+        } else {
+          setSearchView(true);
         }
       })
       .catch((err) => {
@@ -98,7 +125,7 @@ const Home = () => {
     <Container className="container">
       <header>
         <div className="menu">
-          <Dropdown>
+          <Dropdown className="dropdown">
             <Dropdown.Toggle
               variant="success"
               id="dropdown-basic"
@@ -152,15 +179,15 @@ const Home = () => {
         </div>
 
         <span
-          title="A anotação do professor não deixa claro os descontos dados"
+          title="Contagem relativa à filtragem aplicada"
           className="cents"
         >
           {projects?.length > 0
-            ? `Aproximadamente ${cents} centavos acumulados - ${situation}`
+            ? `${cents} centavos acumulados`
             : ""}
         </span>
         <div className="form">
-          <Dropdown
+          {!searchView?<></>:<div className="filters"><Dropdown
             className="actionbar"
             onSelect={(k, e) => {
               const [key, direction] = k.split(":");
@@ -251,6 +278,42 @@ const Home = () => {
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
+
+          <Dropdown
+            className="actionbar"
+            onSelect={(k, e) => {
+              const [key] = k;
+              setFilter({
+                key,
+                name: `${e.target.text}`,
+              });
+            }}
+          >
+            <Dropdown.Toggle
+              variant="success"
+              id="dropdown-basic"
+              className="actionbar__select"
+            >
+              <Row>
+                <span>
+                  {filter ? `${filter.name}` : "Filtrar por"}{" "}
+                </span>
+              </Row>
+              <ChevronDown />
+              <Dropdown.Menu className="actionbar__menu">
+              {
+                types.map((res) => { return(
+                  <Dropdown.Item
+                    className="actionbar__menuItem"
+                    eventKey={`${res}`}
+                  >
+                    {res.toUpperCase()}
+                  </Dropdown.Item>)
+                })
+              }
+              </Dropdown.Menu>
+            </Dropdown.Toggle>
+          </Dropdown></div>}
           <form className="search-box" onSubmit={handleSearch}>
             <input
               placeholder="ID DE ANONIMIZAÇÃO"
@@ -264,32 +327,37 @@ const Home = () => {
           </form>
         </div>
       </header>
-
       <main>
-        {projects?.length > 0
-          ? handleOrder([...projects]).map((res) => (
-              <Card
-                cents={res.cents}
-                date={res.date}
-                description={res.description}
-                mode={res.mode}
-                key={Math.random()}
-              />
-            ))
-          : "Pesquise pelo seu ID DE ANONIMIZAÇÃO e confira suas atividades corrigidas e centavos acumulados na disciplina de LOAC."}
+          {projects?.length > 0
+            ? handleOrder([...projects]).map((res) => {
+                if (!filter) {
+                  return(<Card
+                    cents={res.cents}
+                    date={res.date}
+                    description={res.description}
+                    mode={res.mode}
+                    key={Math.random()}
+                  />)
+                } else if (filter.name === 'TODOS') {
+                  return(<Card
+                    cents={res.cents}
+                    date={res.date}
+                    description={res.description}
+                    mode={res.mode}
+                    key={Math.random()}
+                  />)
+                } else if (filter.name === res.mode.toUpperCase()) {
+                  return(<Card
+                    cents={res.cents}
+                    date={res.date}
+                    description={res.description}
+                    mode={res.mode}
+                    key={Math.random()}
+                  />)
+                }
+            })
+            : "Pesquise pelo seu ID DE ANONIMIZAÇÃO e confira suas atividades corrigidas e centavos acumulados na disciplina de LOAC."}
       </main>
-
-        <Toast show={showA} onClose={toggleShowA} className="toast" autohide delay={500000}>
-          <Toast.Header className="toast-header">
-            NOVIDADE!
-          </Toast.Header>
-          <Toast.Body>
-            <p>
-            Quer saber como anda a situação geral da turma em uma análise rápida?
-            Confira o <a href="/analytics">Centavos Analytics</a>
-            </p>
-          </Toast.Body>
-        </Toast>
       <Footer />
     </Container>
   );

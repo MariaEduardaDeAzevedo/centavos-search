@@ -1,4 +1,4 @@
-div.card {
+div.card, div.card-clicked {
     display: flex;
     flex-direction: column;
     border: solid;
@@ -7,6 +7,16 @@ div.card {
     border-radius: 0.2rem;
     width: 24vw;
     height: 18vh;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+div.card-clicked {
+    height: 24vh;
+}
+
+div.card-clicked {
+    height: 25vh;
 }
 
 div.card div.header {
@@ -27,4 +37,9 @@ div.card p {
     div.card {
         width: 80vw;
     }
+    div.card-clicked {
+        width: 80vw;
+        height: 25vh;
+    }
+    
 }

@@ -2,6 +2,7 @@
 
 :root {
     --green: #7dc49c;
+    --green-smooth: #9ee4bc;
     --green-darker: #60c48b;
     scroll-behavior: smooth;
 }
@@ -120,6 +121,7 @@ body {
     border: none;
     padding: 1rem;
     justify-content: space-between;
+    z-index: 10;
 }
 
 .container header .menu .drop .drop-item {
@@ -165,6 +167,14 @@ body {
     gap: 0.5rem;
 }
 
+.filters {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
 .actionbar__menu {
     width: 100%;
     display: flex;
@@ -205,6 +215,7 @@ header form.search-box {
 }
 
 header span.cents {
+    padding: 1rem;
     cursor: pointer;
     transition: 0.2s;
 }
@@ -311,7 +322,7 @@ header span.desc {
     }
 
     .container main {
-        margin-top: 16rem;
+        margin-top: 18rem;
         text-align: justify;
         flex-direction: column;
     }
