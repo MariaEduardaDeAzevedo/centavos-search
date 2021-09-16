@@ -147,6 +147,6 @@ def analytics():
     obj_analytics['max'] = max(list_median)
     obj_analytics['min'] = min(list_median)
     obj_analytics['mean'] = round(sum(list_median)/len(list_median))
-    obj_analytics['percent_approved'] = round(obj_analytics['approved']/len(list_median), 2)
+    obj_analytics['percent_approved'] = round(obj_analytics['approved']/len(list_median) * 100, 2)
 
     return obj_analytics
